@@ -1,7 +1,6 @@
 from glob import glob
 import json
 
-
 def process_all_data(path, all_data = []):
     for file in glob(path):
         with open(file, encoding='latin-1') as json_file:    
@@ -17,12 +16,10 @@ def process_all_data(path, all_data = []):
                 all_data.append(aux)
     return all_data
 
-
 def write_to_json(data, file_output):
     with open(file_output, "w", encoding='latin-1') as outfile:
         json.dump(data, outfile, ensure_ascii=False, indent=4)
     
-
 
 if __name__ == "__main__":
     path_to_data = 'data/*.json'
