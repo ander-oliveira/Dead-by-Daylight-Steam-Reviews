@@ -1,6 +1,5 @@
 from glob import glob
 import json
-import datetime as dt
 
 
 def process_all_data(path, all_data = []):
@@ -12,12 +11,7 @@ def process_all_data(path, all_data = []):
                 for k,v in review.items():
                     if k == 'author':
                         for a, b in v.items():
-                            if a == 'last_played':
-                                aux[a] = dt.datetime.utcfromtimestamp(b).strftime("%Y/%m/%d")
-                            else:
-                                aux[a] = b
-                    elif k == 'timestamp_created' or k == 'timestamp_updated':
-                        aux[k] = dt.datetime.utcfromtimestamp(v).strftime("%Y/%m/%d")
+                            aux[a] = b
                     else:
                         aux[k] = v
                 all_data.append(aux)
