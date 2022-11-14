@@ -8,13 +8,16 @@ def process_all_data(path, all_data = []):
             data = json.load(json_file)
             for review in data['reviews']:
                 aux = {}
+                # The author data in dataset is a nested dictionary.
                 for k,v in review.items():
                     if k == 'author':
                         for a, b in v.items():
+                            # Converting last time played DBD timestamp to date in Year/month/day format
                             if a == 'last_played':
                                 aux[a] = dt.datetime.utcfromtimestamp(b).strftime("%Y/%m/%d")
                             else:
                                 aux[a] = b
+                    # Converting review created/updated timestamp to date in Year/month/day format
                     elif k == 'timestamp_created' or k == 'timestamp_updated':
                         aux[k] = dt.datetime.utcfromtimestamp(v).strftime("%Y/%m/%d")
                     else:
